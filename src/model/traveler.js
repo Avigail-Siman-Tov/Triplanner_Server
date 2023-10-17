@@ -16,6 +16,9 @@ const Traveler = mongoose.model('Traveler', new mongoose.Schema({
     travelerGender:{
         type:String,
     },
+    travelerPicture: {
+        type: String
+    },
     travelerFavoriteCategories:[{
         type:String
     }]

@@ -1,4 +1,5 @@
 const express = require('express')
+const multer = require('multer');
 const app = express()
 const path=require('path');
 const dotenv=require('dotenv')
@@ -11,6 +12,7 @@ const mongoose=require('mongoose')
 
 const apiPlanTrip = require('./route/apiPlanTrip');
 const apiTraveler = require('./route/apiTraveler');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -41,6 +43,7 @@ app.get('/', (req,res) => {
 
 app.use('/plantrip',apiPlanTrip)
 app.use('/traveler',apiTraveler)
+
 
 
 const port =  process.env.PORT || 4000

@@ -14,7 +14,7 @@ const infoTraveler = (req, res) => {
     }).catch(err=> {
         res.send("False")
     })
-    
+
 }
 const addTrip = (req,res) =>{
     
@@ -158,7 +158,8 @@ const addTraveler= (req,res)=>{
         travelerName:req.query.travelerName,
         travelerBirthYear:req.query.travelerBirthYear,
         travelerGender:req.query.travelerGender,
-        travelerFavoriteCategories:req.query.travelerFavoriteCategories
+        travelerPicture:req.query.travelerPicture,
+        travelerFavoriteCategories:req.query.travelerFavoriteCategories,
     })
     console.log("traveler", traveler)
     traveler.save()
@@ -176,7 +177,8 @@ const editTraveler = (req,res)=>{
         travelerName:req.query.travelerName,
         travelerBirthYear:req.query.travelerBirthYear,
         travelerGender:req.query.travelerGender,
-        travelerFavoriteCategories:req.query.travelerFavoriteCategories
+        travelerPicture:req.query.travelerPicture,
+        travelerFavoriteCategories:req.query.travelerFavoriteCategories,
     }
     console.log("traveler", traveler)
     Traveler.findOneAndUpdate({travelerMail:req.query.travelerMail},traveler, {new: true })
@@ -198,4 +200,7 @@ const editTravelerPlace = (req,res)=>{
         res.send("false")
     })
 }
+
+
+
 module.exports = {infoTraveler,addTraveler,getInfoTraveler,editTraveler,addTrip,addPlace,getTripUser,editTravelerPlace}
