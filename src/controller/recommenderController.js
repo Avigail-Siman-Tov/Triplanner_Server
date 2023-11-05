@@ -7,10 +7,10 @@ var recommender = new jsrecommender.Recommender();
 const recommendeCollaborativeFilterin = async (req, res) => {
   console.log("query", req.query)
 
-  TravelerPlaces.find({ travelerMail: req.body.travelerMail }, { travelerMail: 1, placeId: 1, travelerPlaceRating: 1, _id: 0 })
+  TravelerPlaces.find({ travelerMail: req.query.travelerMail }, { travelerMail: 1, placeId: 1, travelerPlaceRating: 1, _id: 0 })
     .then(resTravelerPlaces => {
 
-      TravelerPlaces.find({ tripDestination: req.body.tripDestination }, { travelerMail: 1, placeId: 1, travelerPlaceRating: 1, tripDestination: 1, _id: 0 })
+      TravelerPlaces.find({ tripDestination: req.query.tripDestination }, { travelerMail: 1, placeId: 1, travelerPlaceRating: 1, tripDestination: 1, _id: 0 })
         .then(resUsersPlacesInDes => {
           const placeInDes = new Set()
           for (const k in resUsersPlacesInDes) {
@@ -74,7 +74,7 @@ const recommendeCollaborativeFilterin = async (req, res) => {
 
         })
         .catch(err => {
-          res.send(req.query)
+          res.send(err)
         })
 
     })

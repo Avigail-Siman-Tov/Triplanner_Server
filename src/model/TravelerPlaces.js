@@ -12,7 +12,6 @@ const TravelerPlaces = mongoose.model('TravelerPlaces', new mongoose.Schema({
     {
         type: String,
         required:true
-        
     },
     placeDayInTrip:{
         type:Number,
