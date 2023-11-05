@@ -74,7 +74,7 @@ const recommendeCollaborativeFilterin = async (req, res) => {
 
         })
         .catch(err => {
-          res.send("err3")
+          res.send(req.query)
         })
 
     })
