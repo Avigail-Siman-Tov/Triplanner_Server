@@ -64,22 +64,22 @@ const recommendeCollaborativeFilterin = async (req, res) => {
                   res.send(result)
                 })
                 .catch(err => {
-                  res.send(err)
+                  res.send("err1")
                 })
 
             })
             .catch(err => {
-              res.send(err)
+              res.send("err2")
             })
 
         })
         .catch(err => {
-          res.send(err)
+          res.send("err3")
         })
 
     })
     .catch(err => {
-      res.send(err)
+      res.send("err4")
     })
 }
 
