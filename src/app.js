@@ -1,7 +1,7 @@
 const express = require('express')
 const multer = require('multer');
 const app = express()
-const path=require('path');
+const path =require('path');
 const dotenv=require('dotenv')
 const isProd = process.env.APP_ENV === 'prod'
 if(!isProd)
