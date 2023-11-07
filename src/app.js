@@ -29,7 +29,7 @@ const connectionParams = {
     useUnifiedTopology: true
 }
 
-mongoose.connect("mongodb+srv://tehilamc:212038699@triplanner.iw1dk3g.mongodb.net/", connectionParams)
+mongoose.connect("mongodb+srv://avigailsi2001:323924605@cluster0.1qhigpp.mongodb.net/", connectionParams)
     .then(() => {
         console.log('connected');
 
