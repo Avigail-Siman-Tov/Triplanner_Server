@@ -64,17 +64,17 @@ const recommendeCollaborativeFilterin = async (req, res) => {
                   res.send(result)
                 })
                 .catch(err => {
-                  res.send("err1")
+                  res.send("false")
                 })
 
             })
             .catch(err => {
-              res.send("err2")
+              res.send("false")
             })
 
         })
         .catch(err => {
-          res.send(req.query.tripDestination)
+          res.send(resUsersPlacesInDes)
         })
 
     })
