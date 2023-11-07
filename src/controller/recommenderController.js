@@ -74,12 +74,12 @@ const recommendeCollaborativeFilterin = async (req, res) => {
 
         })
         .catch(err => {
-          res.send(resUsersPlacesInDes)
+          res.send("false")
         })
 
     })
     .catch(err => {
-      res.send("err4")
+      res.send("false")
     })
 }
 
