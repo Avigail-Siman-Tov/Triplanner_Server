@@ -1,4 +1,4 @@
-const { Set } = require("express/lib/application");
+const { set } = require("express/lib/application");
 var jsrecommender = require("js-recommender");
 const Place = require("../model/Place");
 const TravelerPlaces = require('../model/TravelerPlaces');
@@ -25,7 +25,6 @@ const recommendeCollaborativeFilterin = async (req, res) => {
           TravelerPlaces.find({ placeId: { $in: Array.from(places) } }, { travelerMail: 1, placeId: 1, travelerPlaceRating: 1, _id: 0 })
             .then(resUsersPlaces => {
               var table = new jsrecommender.Table();
-              // table.setCell('[place-id]', '[traveler mail]', [score]);
               for (const j in resUsersPlaces) {
                 table.setCell(resUsersPlaces[j].placeId, resUsersPlaces[j].travelerMail, resUsersPlaces[j].travelerPlaceRating);
               }
@@ -64,22 +63,22 @@ const recommendeCollaborativeFilterin = async (req, res) => {
                   res.send(result)
                 })
                 .catch(err => {
-                  res.send("false")
+                  res.send('false')
                 })
 
             })
             .catch(err => {
-              res.send("false")
+              res.send('false')
             })
 
         })
         .catch(err => {
-          res.send("false")
+          res.send('false')
         })
 
     })
     .catch(err => {
-      res.send("false")
+      res.send('false')
     })
 }
 
