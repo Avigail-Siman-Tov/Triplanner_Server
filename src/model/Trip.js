@@ -22,6 +22,9 @@ const Trip = mongoose.model('Trip', new mongoose.Schema({
     },
     tripDate:{
         type:String
+    },
+    tripPicture:{
+        type:String
     }
 }));
 
