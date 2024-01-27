@@ -29,7 +29,7 @@ const addTrip = (req,res) =>{
         tripDate:req.query.tripDate,
         tripPicture:req.query.tripPicture,
         tripDateStart:req.query.tripDateStart,
-        tripDateFinish:req.query.tripDateFinish
+        tripDateEnd:req.query.tripDateEnd
     })
     console.log(trip)
     trip.save()

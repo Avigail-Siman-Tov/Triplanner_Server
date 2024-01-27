@@ -29,7 +29,7 @@ const Trip = mongoose.model('Trip', new mongoose.Schema({
     tripDateStart:{
         type:String
     },
-    tripDateFinish:{
+    tripDateEnd:{
         type:String
     },
 }));
