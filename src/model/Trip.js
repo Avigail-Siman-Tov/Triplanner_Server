@@ -25,7 +25,13 @@ const Trip = mongoose.model('Trip', new mongoose.Schema({
     },
     tripPicture:{
         type:String
-    }
+    },
+    tripDateStart:{
+        type:String
+    },
+    tripDateFinish:{
+        type:String
+    },
 }));
 
 module.exports = Trip
