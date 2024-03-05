@@ -143,15 +143,15 @@ const getTripUser = (req,res)=>{
 //         res.send( 'An error add travelerPlaces !')
 //     })
 // }
-// const getInfoTraveler = (req, res) => {
-//     Traveler.findOne({travelerMail: req.query.travelerMail}).then(traveler=> {
-//         const x= typeof traveler
-//         console.log(x)
-//         res.send(traveler)
-//     }).catch(err=> {
-//         res.send("False")
-//     })
-// }
+const getInfoTraveler = (req, res) => {
+    Traveler.findOne({travelerMail: req.query.travelerMail}).then(traveler=> {
+        const x= typeof traveler
+        console.log(x)
+        res.send(traveler)
+    }).catch(err=> {
+        res.send("False")
+    })
+}
 const addPlace = (req, res) => {
     console.log("body", req.body)
     console.log("params", req.params)
