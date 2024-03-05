@@ -103,55 +103,110 @@ const getTripUser = (req,res)=>{
         res.send('false')
     })
 }
-const addPlace = (req,res) =>{
+// const addPlace = (req,res) =>{
+//     console.log("body", req.body)
+//     console.log("params", req.params)
+//     console.log("query", req.query)
+//     const travelerPlaces = new  TravelerPlaces({
+//         placeId:req.query.placeId,
+//         travelerMail:req.query.travelerMail,
+//         tripId: req.query.tripId,
+//         placeDayInTrip :req.query.placeDayInTrip,
+//         travelerPlaceRating: 0,
+//         tripDestination:req.query.tripDestination
+//     })
+    
+//     travelerPlaces.save().then(response=>{
+        
+//         const place= new Place({
+//             placeId: req.query.placeId,
+//             placeName: req.query.placeName,
+//             placeFormattedAddress:req.query.placeFormattedAddress,
+//             placeInternationalPhoneNumber:req.query.placeInternationalPhoneNumber,
+//             placeLocationLat:req.query.placeLocationLat,
+//             placeLocationLng:req.query.placeLocationLng,
+//             placeRating:req.query.placeRating,
+//             placeWebsite:req.query.placeWebsite,
+//             placeImgUrl:req.query.placeImgUrl,
+//             placeOpeningHours:req.query.placeOpeningHours
+//         })
+//         place.save()
+//             .then(response=>{
+//                 res.send('true')
+//             })
+//             .catch(error =>{
+//                 res.send( 'Exiting place in database')
+//             })
+        
+//     })
+//     .catch(error =>{
+//         res.send( 'An error add travelerPlaces !')
+//     })
+// }
+// const getInfoTraveler = (req, res) => {
+//     Traveler.findOne({travelerMail: req.query.travelerMail}).then(traveler=> {
+//         const x= typeof traveler
+//         console.log(x)
+//         res.send(traveler)
+//     }).catch(err=> {
+//         res.send("False")
+//     })
+// }
+const addPlace = (req, res) => {
     console.log("body", req.body)
     console.log("params", req.params)
     console.log("query", req.query)
-    const travelerPlaces = new  TravelerPlaces({
-        placeId:req.query.placeId,
-        travelerMail:req.query.travelerMail,
-        tripId: req.query.tripId,
-        placeDayInTrip :req.query.placeDayInTrip,
-        travelerPlaceRating: 0,
-        tripDestination:req.query.tripDestination
-    })
-    
-    travelerPlaces.save().then(response=>{
-        
-        const place= new Place({
-            placeId: req.query.placeId,
-            placeName: req.query.placeName,
-            placeFormattedAddress:req.query.placeFormattedAddress,
-            placeInternationalPhoneNumber:req.query.placeInternationalPhoneNumber,
-            placeLocationLat:req.query.placeLocationLat,
-            placeLocationLng:req.query.placeLocationLng,
-            placeRating:req.query.placeRating,
-            placeWebsite:req.query.placeWebsite,
-            placeImgUrl:req.query.placeImgUrl,
-            placeOpeningHours:req.query.placeOpeningHours
+
+    // Check if the place already exists
+    Place.findOne({ placeId: req.query.placeId })
+        .then(existingPlace => {
+            if (existingPlace) {
+                // Place already exists, do not add again
+                res.send('Place already exists in the database');
+            } else {
+                // Place doesn't exist, add it to the database
+                const travelerPlaces = new TravelerPlaces({
+                    placeId: req.query.placeId,
+                    travelerMail: req.query.travelerMail,
+                    tripId: req.query.tripId,
+                    placeDayInTrip: req.query.placeDayInTrip,
+                    travelerPlaceRating: 0,
+                    tripDestination: req.query.tripDestination
+                });
+
+                travelerPlaces.save().then(response => {
+                    const place = new Place({
+                        placeId: req.query.placeId,
+                        placeName: req.query.placeName,
+                        placeFormattedAddress: req.query.placeFormattedAddress,
+                        placeInternationalPhoneNumber: req.query.placeInternationalPhoneNumber,
+                        placeLocationLat: req.query.placeLocationLat,
+                        placeLocationLng: req.query.placeLocationLng,
+                        placeRating: req.query.placeRating,
+                        placeWebsite: req.query.placeWebsite,
+                        placeImgUrl: req.query.placeImgUrl,
+                        placeOpeningHours: req.query.placeOpeningHours
+                    });
+
+                    place.save()
+                        .then(response => {
+                            res.send('true');
+                        })
+                        .catch(error => {
+                            res.send('Error adding place to the database');
+                        });
+
+                })
+                    .catch(error => {
+                        res.send('Error adding travelerPlaces!');
+                    });
+            }
         })
-        place.save()
-            .then(response=>{
-                res.send('true')
-            })
-            .catch(error =>{
-                res.send( 'Exiting place in database')
-            })
-        
-    })
-    .catch(error =>{
-        res.send( 'An error add travelerPlaces !')
-    })
-}
-const getInfoTraveler = (req, res) => {
-    Traveler.findOne({travelerMail: req.query.travelerMail}).then(traveler=> {
-        const x= typeof traveler
-        console.log(x)
-        res.send(traveler)
-    }).catch(err=> {
-        res.send("False")
-    })
-}
+        .catch(error => {
+            res.send('An error occurred while checking for existing place!');
+        });
+};
+
 const addTraveler= (req,res)=>{
     console.log("body", req.body)
     console.log("params", req.params)
