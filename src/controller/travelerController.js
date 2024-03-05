@@ -160,10 +160,7 @@ const addPlace = (req, res) => {
     // Check if the place already exists
     Place.findOne({ placeId: req.query.placeId })
         .then(existingPlace => {
-            if (existingPlace) {
-                // Place already exists, do not add again
-                res.send('Place already exists in the database');
-            } else {
+            
                 // Place doesn't exist, add it to the database
                 const travelerPlaces = new TravelerPlaces({
                     placeId: req.query.placeId,
@@ -175,32 +172,40 @@ const addPlace = (req, res) => {
                 });
 
                 travelerPlaces.save().then(response => {
-                    const place = new Place({
-                        placeId: req.query.placeId,
-                        placeName: req.query.placeName,
-                        placeFormattedAddress: req.query.placeFormattedAddress,
-                        placeInternationalPhoneNumber: req.query.placeInternationalPhoneNumber,
-                        placeLocationLat: req.query.placeLocationLat,
-                        placeLocationLng: req.query.placeLocationLng,
-                        placeRating: req.query.placeRating,
-                        placeWebsite: req.query.placeWebsite,
-                        placeImgUrl: req.query.placeImgUrl,
-                        placeOpeningHours: req.query.placeOpeningHours
-                    });
-
-                    place.save()
-                        .then(response => {
-                            res.send('true');
-                        })
-                        .catch(error => {
-                            res.send('Error adding place to the database');
+                    if (existingPlace) {
+                        // Place already exists, do not add again
+                        res.send('Place already exists in the database');
+                    }
+                    else{
+                        const place = new Place({
+                            placeId: req.query.placeId,
+                            placeName: req.query.placeName,
+                            placeFormattedAddress: req.query.placeFormattedAddress,
+                            placeInternationalPhoneNumber: req.query.placeInternationalPhoneNumber,
+                            placeLocationLat: req.query.placeLocationLat,
+                            placeLocationLng: req.query.placeLocationLng,
+                            placeRating: req.query.placeRating,
+                            placeWebsite: req.query.placeWebsite,
+                            placeImgUrl: req.query.placeImgUrl,
+                            placeOpeningHours: req.query.placeOpeningHours
                         });
+    
+                        place.save()
+                            .then(response => {
+                                res.send('true');
+                            })
+                            .catch(error => {
+                                res.send('Error adding place to the database');
+                            });
+                        
+                    }
+                    
 
                 })
                     .catch(error => {
                         res.send('Error adding travelerPlaces!');
                     });
-            }
+            
         })
         .catch(error => {
             res.send('An error occurred while checking for existing place!');
