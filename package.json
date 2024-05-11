@@ -21,7 +21,8 @@
     "js-recommender": "^1.0.5",
     "kmeans-same-size": "^1.0.1",
     "mongoose": "^7.4.3",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "punycode": "^2.3.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.20"
